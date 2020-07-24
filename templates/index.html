@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AILAB - DemoMOS - Noah</title>
+</head>
+
+<body>
+
+    <h2>Sample audio for: Tacotron2 with Waveglow for Vietnamese</h2>
+    <h3 style="font-weight: bold;color: rgb(54, 190, 0);">Data for training: BigCorpus VLSP 2019: include noise</h3>
+    <h3>Improvement</h3>
+    <ul style="list-style-type:square;">
+        <li>Abstract</li>
+        <li>- 5: Excellent, very natural (human speech)</li>
+        <li>- 4: Good, natural</li>
+        <li>- 3: Fair, rather natural</li>
+        <li>- 2: Poor, rather unnatural (rather robotic)</li>
+        <li>- 1: Bad, very unnatural (robotic).</li>
+    </ul>
+
+    <br>
+    <form method="GET" , action="thank">
+        <h4>Could you give us you nickname</h4>
+        <input type="text" id="lname" name="lname">
+        <br>
+        <h3>Data has been shuffled includes human and synthesis audio</h3>
+
+        {% for line in lines %}
+
+        {% set i = loop.index %}
+        {% set y = i-1 %}
+        <h4>{{line}}</h4>
+        <audio controls preload="none">
+            <source src="static/TACO/{{y}}.wav" type="audio/wav"> </audio>
+        <select name="taco-{{y}}">
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+        </select>
+        <audio controls preload="none">
+            <source src="static/TRUTH/{{y}}.wav" type="audio/wav"> </audio>
+        <select name="truth-{{y}}">
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+        </select>
+        {% endfor %}
+        <br>
+        <input type="submit" name="detail_infor" value="Submit">
+    </form>
+</body>
+
+</html>

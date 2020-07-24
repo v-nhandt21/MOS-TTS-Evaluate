@@ -1,0 +1,7 @@
+Because this is on free server:
++Heroku require < 500MB => can not install tensorflow and mathplot in requirement.txt (nead 650MB)
+Because Source code on git:
++Git require <100MB => Can not load checkpoint of tacontron2 and waveglow for synthesis (600MB total)
++tensorflow is not use => hpramer.py can be use
+Because free Server can not support GPU:
++Must to use Pytorch-cpu => The denoiser voice function can not used (require gpu) => voice not clear
