@@ -47,6 +47,7 @@ def thank():
 
         with open("static/result/"+name,'w+',encoding="utf-8") as fw:
             fw.write(now+"\n")
+            fw.write(str(name)+"\n")
             fw.write(str(MOS_TACO)+"\n")
             fw.write(str(MOS_TRUTH)+"\n")
         with open("static/result/user",'a+',encoding="utf-8") as fw:
@@ -75,6 +76,8 @@ def mos():
     MOS_TRUTH=0
     MOS_TACO=0
     for i in user:
+        if i[0]!="_":
+            continue
         with open("static/result/"+str(i), "r" ,encoding="utf-8") as f:
             lines = f.read().splitlines()
             print(float(lines[2]))
