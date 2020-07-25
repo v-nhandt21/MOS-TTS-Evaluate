@@ -80,9 +80,9 @@ def mos():
             continue
         with open("static/result/"+str(i), "r" ,encoding="utf-8") as f:
             lines = f.read().splitlines()
-            print(float(lines[2]))
-            MOS_TACO=MOS_TACO+float(lines[1])
-            MOS_TRUTH=MOS_TRUTH+float(lines[2])
+            #print(float(lines[2]))
+            MOS_TACO=MOS_TACO+float(lines[2])
+            MOS_TRUTH=MOS_TRUTH+float(lines[3])
     JS = "MOS of Tacotron is: " + str(float("{:.2f}".format(MOS_TACO/float(len(user))))) + "\n"
     JS +="MOS of Ground Truth is: " + str(float("{:.2f}".format(MOS_TRUTH/float(len(user))))) + "\n"
     return render_template('results.html',JS=JS)
