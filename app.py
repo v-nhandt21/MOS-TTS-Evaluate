@@ -75,6 +75,9 @@ def mos():
     JS=""
     MOS_TRUTH=0
     MOS_TACO=0
+
+    if len(user) ==0:
+        return render_template('results.html',JS="No valid user now")
     for i in user:
         if i[0]!="_":
             continue
