@@ -54,7 +54,8 @@ def thank():
             fw.write(str(MOS_TRUTH)+"\n")
         with open("static/result/user",'a+',encoding="utf-8") as fw:
             fw.write(name+"\n")
-    return render_template('thank.html')
+        res="Taco: "+str(MOS_TACO)+"  "+"Truth: "+str(MOS_TRUTH)
+    return render_template('thank.html', res=res)
 
 
 @app.route("/results", methods=['GET', 'POST'])
@@ -62,11 +63,11 @@ def results():
     user=[]
     with open("static/result/user","r",encoding="utf-8") as f:
         user=f.read().splitlines()
-    JS=""
-    for i in user:
+    JS=[]
+    for i in list(set(user)):
         with open("static/result/"+str(i), "r" ,encoding="utf-8") as f:
             lines = f.read()
-            JS+=lines+"\n"
+            JS.append(lines.replace("\n","\t"))
     return render_template('results.html',JS=JS)
 
 @app.route("/mos", methods=['GET', 'POST'])
@@ -75,22 +76,24 @@ def mos():
     with open("static/result/user","r",encoding="utf-8") as f:
         user=f.read().splitlines()
     JS=""
-    MOS_TRUTH=0
+    MOS_TRUTH=0 
     MOS_TACO=0
 
+    user_ =0
     if len(user) ==0:
-        return render_template('results.html',JS="No valid user now")
-    for i in user:
+        return render_template('mos.html',JS="No valid user now")
+    for i in list(set(user)):
         if i[0]!="_":
             continue
-        with open("static/result/"+str(i), "r" ,encoding="utf-8") as f:
-            lines = f.read().splitlines()
+        user_+=1
+        with open("static/result/"+str(i), "r" ,encoding="utf-8") as ff:
+            lines = ff.read().splitlines()
             #print(float(lines[2]))
             MOS_TACO=MOS_TACO+float(lines[2])
             MOS_TRUTH=MOS_TRUTH+float(lines[3])
-    JS = "MOS of Tacotron is: " + str(float("{:.2f}".format(MOS_TACO/float(len(user))))) + "\n"
-    JS +="MOS of Ground Truth is: " + str(float("{:.2f}".format(MOS_TRUTH/float(len(user))))) + "\n"
-    return render_template('results.html',JS=JS)
+    JS = "MOS of Tacotron is: " + str(float("{:.2f}".format(MOS_TACO/float(user_)))) + "\n"
+    JS +="MOS of Ground Truth is: " + str(float("{:.2f}".format(MOS_TRUTH/float(user_)))) + "\n"
+    return render_template('mos.html',JS=JS)
 
 if __name__ == "__main__":
     app.run(host= '192.168.100.8')
