@@ -83,7 +83,8 @@ def mos():
     if len(user) ==0:
         return render_template('mos.html',JS="No valid user now")
     for i in list(set(user)):
-        if i[0]!="_":
+        
+        if i[0]=="_":
             continue
         user_+=1
         with open("static/result/"+str(i), "r" ,encoding="utf-8") as ff:
