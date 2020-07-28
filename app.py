@@ -3,19 +3,21 @@ DEV=0
 from flask import Flask, render_template, request,json
 import sys
 from datetime import datetime
+import random
 #sys.path.append('Service/')
 import warnings
 warnings.filterwarnings("ignore")
-if DEV:
-    from inference import getAudio
 app = Flask(__name__, static_url_path='/static')
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
     with open("static/sample.txt", "r" ,encoding="utf-8") as f:
         lines = f.readlines()
-        #print(lines)
-    return render_template('index.html',lines=lines)
+    ranlist=[]
+    for f in range(len(lines)):
+        ranlist.append(random.randint(3, 90)%2)
+    print(ranlist)
+    return render_template('index.html',lines=lines,ranlist=ranlist)
 
 
 @app.route("/thank", methods=['GET', 'POST'])

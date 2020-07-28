@@ -32,7 +32,10 @@
 
         {% set i = loop.index %}
         {% set y = i-1 %}
+
         <h4>{{line}}</h4>
+
+        {% if ranlist[y] == 0 %}
         <audio controls preload="none">
             <source src="static/TACO/{{y}}.wav" type="audio/wav"> </audio>
         <select name="taco-{{y}}">
@@ -42,6 +45,7 @@
             <option value="2">2</option>
             <option value="1">1</option>
         </select>
+
         <audio controls preload="none">
             <source src="static/Truth/{{y}}.wav" type="audio/wav"> </audio>
         <select name="truth-{{y}}">
@@ -51,6 +55,29 @@
             <option value="2">2</option>
             <option value="1">1</option>
         </select>
+
+        {% else %}
+        <audio controls preload="none">
+            <source src="static/Truth/{{y}}.wav" type="audio/wav"> </audio>
+        <select name="truth-{{y}}">
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+        </select>
+
+        <audio controls preload="none">
+            <source src="static/TACO/{{y}}.wav" type="audio/wav"> </audio>
+        <select name="taco-{{y}}">
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+        </select>
+        {% endif %}
+
         {% endfor %}
         <br>
         <input type="submit" name="detail_infor" value="Submit">
