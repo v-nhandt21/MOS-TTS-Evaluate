@@ -86,7 +86,7 @@ def mos():
         
         if i[0]=="_":
             continue
-        user_+=1
+        user_+=1    
         with open("static/result/"+str(i), "r" ,encoding="utf-8") as ff:
             lines = ff.read().splitlines()
             #print(float(lines[2]))
@@ -97,7 +97,7 @@ def mos():
     return render_template('mos.html',JS=JS)
 
 if __name__ == "__main__":
-    app.run(host= '192.168.100.8')
+    app.run()
 
 
 '''
