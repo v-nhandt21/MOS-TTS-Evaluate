@@ -112,8 +112,9 @@ def mos():
             #print(float(lines[2]))
             MOS_TACO=MOS_TACO+float(lines[2])
             MOS_TRUTH=MOS_TRUTH+float(lines[3])
-    JS = "MOS of Tacotron is: " + str(float("{:.2f}".format(MOS_TACO/float(user_)))) + "\n"
-    JS +="MOS of Ground Truth is: " + str(float("{:.2f}".format(MOS_TRUTH/float(user_)))) + "\n"
+    if len(list(set(user))) > 0 :
+        JS = "MOS of Tacotron is: " + str(float("{:.2f}".format(MOS_TACO/float(user_)))) + "\n"
+        JS +="MOS of Ground Truth is: " + str(float("{:.2f}".format(MOS_TRUTH/float(user_)))) + "\n"
     return render_template('mos.html',JS=JS)
 
 if __name__ == "__main__":
