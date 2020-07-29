@@ -6,8 +6,22 @@ from datetime import datetime
 import random
 #sys.path.append('Service/')
 import warnings
+
+from flask_mail import Mail, Message
+
+
+
 warnings.filterwarnings("ignore")
 app = Flask(__name__, static_url_path='/static')
+
+mail=Mail(app) 
+app.config['MAIL_SERVER']='smtp.googlemail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'xojziyfay@gmail.com'
+app.config['MAIL_PASSWORD'] = 'qwertyuiopq'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
@@ -55,6 +69,12 @@ def thank():
         with open("static/result/user",'a+',encoding="utf-8") as fw:
             fw.write(name+"\n")
         res="Taco: "+str(MOS_TACO)+"  "+"Truth: "+str(MOS_TRUTH)
+
+
+
+        msg = Message(res, sender = 'xojziyfay@gmail.com', recipients = ['donhanbentre@gmail.com'])
+        msg.body = "Hello Flask message sent from Flask-Mail"
+        mail.send(msg)
     return render_template('thank.html', res=res)
 
 
