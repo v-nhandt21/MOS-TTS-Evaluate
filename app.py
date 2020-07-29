@@ -61,12 +61,6 @@ def thank():
         with open("static/result/user",'a+',encoding="utf-8") as fw:
             fw.write(name+"\n")
         res="Taco: "+str(MOS_TACO)+"  "+"Truth: "+str(MOS_TRUTH)
-
-
-
-        msg = Message(res, sender = 'xojziyfay@gmail.com', recipients = ['donhanbentre@gmail.com'])
-        msg.body = "Hello Flask message sent from Flask-Mail"
-        mail.send(msg)
     return render_template('thank.html', res=res)
 
 
