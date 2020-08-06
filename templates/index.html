@@ -44,7 +44,7 @@
 
         <h4>{{line}}</h4>
 
-        {% if ranlist[y] == 0 %}
+        {% if ranlist[y] != 100 %}
         <audio controls preload="none">
             <source src="static/TACO/{{y}}.wav" type="audio/wav"> </audio>
         <select name="taco-{{y}}" required>
